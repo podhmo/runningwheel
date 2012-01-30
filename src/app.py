@@ -4,6 +4,7 @@ from webob.dec import wsgify
 from webdispatch.mixins import URLMapperMixin
 from staticserve import StaticServeView
 from service import Service
+from with_fanstatic import with_fanstatic
 import os
 
 class MyRequest(Request, URLMapperMixin):
@@ -14,9 +15,11 @@ class WebObDispatcher(URLDispatcher):
         application = wsgify(view, RequestClass=MyRequest)
         super(WebObDispatcher, self).add_url(name, pattern, application)
 
-
+@with_fanstatic
 def hello_view(request):
-    return get_service().get_template("hello.mak").render()
+    response = get_service().get_template("hello.mak").render()
+    from webob import Response
+    return Response(response)
 
 _service = Service({"template.path": os.path.join(".", "templates")})
 
