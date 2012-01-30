@@ -8,7 +8,12 @@ requires = [
     "webdispatch", 
     "webtest", 
     "mako", 
-    "fanstatic"
+    "fanstatic", 
+    "js.json2",
+    "js.underscore", 
+    "js.jquery", 
+    "js.jquery_tools", 
+    "js.jqueryui"
     ]
 
 setup(name='runningwheel',
